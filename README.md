@@ -128,3 +128,11 @@ Run integration tests to ensure the entire system works as expected, including B
 `python tests/test_behave_integration.py`
 
 ## generaeting the chaos files
+Run the Behave tests to generate chaos experiments:
+`behave`
+
+To run a specific feature:
+`behave features/chaos_testing.feature`
+
+To run a specific scenario:
+`behave --name "Simulate a network partition between Service A and Service B"`
