@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "name": "Chaos Experiment: Service A and Service B",
+  "description": "Test resilience of Service A and Service B.",
+  "phases": [
+    {
+      "name": "Chaos Injection",
+      "description": "Introduce network partition between Service A and Service B.",
+      "steps": [
+        {
+          "action": "network_partition",
+          "description": "Partition Service A from Service B.",
+          "input": {
+            "target": "Service A",
+            "isolate_from": "Service B"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chaos Injection",
+      "description": "Add 300ms latency to Service B with 50ms jitter.",
+      "steps": [
+        {
+          "action": "network_latency",
+          "description": "Add 300ms latency to Service B.",
+          "input": {
+            "target": "Service B",
+            "latency_ms": 300,
+            "jitter_ms": 50
+          }
+        }
+      ]
+    },
+    {
+      "name": "Recovery",
+      "description": "Remove network partition and verify recovery.",
+      "steps": [
+        {
+          "action": "remove_network_partition",
+          "description": "Reconnect all services.",
+          "input": {}
+        }
+      ]
+    },
+    {
+      "name": "Observation",
+      "description": "Verify Service B remains operational.",
+      "steps": [
+        {
+          "action": "http",
+          "description": "Check Service B status.",
+          "input": {
+            "method": "GET",
+            "url": "http://service b.local/health"
+          },
+          "expect": {
+            "status": 200,
+            "body_contains": "Operational"
+          }
+        }
+      ]
+    }
+  ]
+}
