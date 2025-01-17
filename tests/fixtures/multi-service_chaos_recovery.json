@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "name": "Chaos Experiment: Service Z",
+  "description": "Test resilience of Service Z.",
+  "phases": [
+    {
+      "name": "Chaos Injection",
+      "description": "Introduce network partition between Service X and Service Y.",
+      "steps": [
+        {
+          "action": "network_partition",
+          "description": "Partition Service X from Service Y.",
+          "input": {
+            "target": "Service X",
+            "isolate_from": "Service Y"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chaos Injection",
+      "description": "Add 400ms latency to Service Z with 50ms jitter.",
+      "steps": [
+        {
+          "action": "network_latency",
+          "description": "Add 400ms latency to Service Z.",
+          "input": {
+            "target": "Service Z",
+            "latency_ms": 400,
+            "jitter_ms": 50
+          }
+        }
+      ]
+    },
+    {
+      "name": "Recovery",
+      "description": "Remove network partition and verify recovery.",
+      "steps": [
+        {
+          "action": "remove_network_partition",
+          "description": "Reconnect all services.",
+          "input": {}
+        }
+      ]
+    },
+    {
+      "name": "Observation",
+      "description": "Verify Service Z remains operational.",
+      "steps": [
+        {
+          "action": "http",
+          "description": "Check Service Z status.",
+          "input": {
+            "method": "GET",
+            "url": "http://service z.local/health"
+          },
+          "expect": {
+            "status": 200,
+            "body_contains": "Operational"
+          }
+        }
+      ]
+    }
+  ]
+}

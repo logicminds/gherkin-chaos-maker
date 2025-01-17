@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "name": "Chaos Experiment: Service C and Service D",
+  "description": "Test resilience of Service C and Service D.",
+  "phases": [
+    {
+      "name": "Chaos Injection",
+      "description": "Introduce network partition between Service A and Service B.",
+      "steps": [
+        {
+          "action": "network_partition",
+          "description": "Partition Service A from Service B.",
+          "input": {
+            "target": "Service A",
+            "isolate_from": "Service B"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Recovery",
+      "description": "Remove network partition and verify recovery.",
+      "steps": [
+        {
+          "action": "remove_network_partition",
+          "description": "Reconnect all services.",
+          "input": {}
+        }
+      ]
+    },
+    {
+      "name": "Chaos Injection",
+      "description": "Introduce network partition between Service C and Service D.",
+      "steps": [
+        {
+          "action": "network_partition",
+          "description": "Partition Service C from Service D.",
+          "input": {
+            "target": "Service C",
+            "isolate_from": "Service D"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Recovery",
+      "description": "Remove network partition and verify recovery.",
+      "steps": [
+        {
+          "action": "remove_network_partition",
+          "description": "Reconnect all services.",
+          "input": {}
+        }
+      ]
+    }
+  ]
+}

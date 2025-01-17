@@ -1,0 +1,106 @@
+{
+  "version": "1.0",
+  "name": "Chaos Experiment: Service C",
+  "description": "Test resilience of Service C.",
+  "phases": [
+    {
+      "name": "Chaos Injection",
+      "description": "Add 500ms latency to Service A with 50ms jitter.",
+      "steps": [
+        {
+          "action": "network_latency",
+          "description": "Add 500ms latency to Service A.",
+          "input": {
+            "target": "Service A",
+            "latency_ms": 500,
+            "jitter_ms": 50
+          }
+        }
+      ]
+    },
+    {
+      "name": "Observation",
+      "description": "Verify Service A remains operational.",
+      "steps": [
+        {
+          "action": "http",
+          "description": "Check Service A status.",
+          "input": {
+            "method": "GET",
+            "url": "http://service a.local/health"
+          },
+          "expect": {
+            "status": 200,
+            "body_contains": "Operational"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chaos Injection",
+      "description": "Add 1000ms latency to Service B with 100ms jitter.",
+      "steps": [
+        {
+          "action": "network_latency",
+          "description": "Add 1000ms latency to Service B.",
+          "input": {
+            "target": "Service B",
+            "latency_ms": 1000,
+            "jitter_ms": 100
+          }
+        }
+      ]
+    },
+    {
+      "name": "Observation",
+      "description": "Verify Service B remains operational.",
+      "steps": [
+        {
+          "action": "http",
+          "description": "Check Service B status.",
+          "input": {
+            "method": "GET",
+            "url": "http://service b.local/health"
+          },
+          "expect": {
+            "status": 200,
+            "body_contains": "Operational"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chaos Injection",
+      "description": "Add 2000ms latency to Service C with 200ms jitter.",
+      "steps": [
+        {
+          "action": "network_latency",
+          "description": "Add 2000ms latency to Service C.",
+          "input": {
+            "target": "Service C",
+            "latency_ms": 2000,
+            "jitter_ms": 200
+          }
+        }
+      ]
+    },
+    {
+      "name": "Observation",
+      "description": "Verify Service C remains operational.",
+      "steps": [
+        {
+          "action": "http",
+          "description": "Check Service C status.",
+          "input": {
+            "method": "GET",
+            "url": "http://service c.local/health"
+          },
+          "expect": {
+            "status": 200,
+            "body_contains": "Operational"
+          }
+        }
+      ]
+    }
+  ]
+}
