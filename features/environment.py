@@ -11,24 +11,26 @@ def before_feature(context, feature):
         "description": "",
         "phases": []
     }
-    
+
+
+def save_experiment_to_file(experiment, feature_name, output_dir="output"):
+    """
+    Save the given experiment object to a JSON file named after the feature.
+    """
+
+    os.makedirs(output_dir, exist_ok=True)
+    file_name = f"{feature_name.replace(' ', '_').lower()}.json"
+    file_path = os.path.join(output_dir, file_name)
+
+    with open(file_path, "w") as f:
+        json.dump(experiment, f, indent=2)
+
+    return file_path  # Return the file path for verification
+
+
 def after_feature(context, feature):
-    """
-    Save the eris_experiment object after each feature.
-    """
     if hasattr(context, "eris_experiment"):
-        output_dir = "output"
-        os.makedirs(output_dir, exist_ok=True)
-
-        # Use the feature name to name the output file
-        feature_name = feature.name.replace(" ", "_").lower()
-        file_name = f"{feature_name}.json"
-        file_path = os.path.join(output_dir, file_name)
-
-        # Write the eris_experiment to a JSON file
-        with open(file_path, "w") as f:
-            json.dump(context.eris_experiment, f, indent=2)
-
+        file_path = save_experiment_to_file(context.eris_experiment, feature.name)
         print(f"Eris experiment saved to {file_path}")
     else:
-        print("No eris_experiment found in context for this feature.")
+        print("No eris_experiment found in feature.")

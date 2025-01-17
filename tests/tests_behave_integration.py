@@ -43,7 +43,9 @@ class TestBehaveContentGeneration(unittest.TestCase):
         with open(file_path, "r") as f:
             data = json.load(f)
 
-        fixture_file = os.path.join(os.path.dirname(__file__), feature_file_name)
+        fixture_file = os.path.join(
+            os.path.dirname(__file__), "fixtures", feature_file_name
+        )
 
         with open(fixture_file, "r") as f:
             expected_structure = json.load(f)
