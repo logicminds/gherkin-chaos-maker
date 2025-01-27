@@ -2,6 +2,7 @@
 
 This project uses **Behave**, a behavior-driven development (BDD) framework, to test and generate chaos testing experiments in JSON format. The framework includes step definitions, hooks, and tests to ensure the correct generation of chaos experiments.
 
+
 ## Features
 
 - Create **Eris experiments** from Gherkin scenarios.
@@ -10,21 +11,6 @@ This project uses **Behave**, a behavior-driven development (BDD) framework, to 
 - Integration tests to ensure the entire process works as expected.
 - Extensible and developer-friendly structure.
 
----
-
-## Table of Contents
-
-1. [Setup](#setup)
-2. [Project Structure](#project-structure)
-3. [Usage](#usage)
-   - [Running Behave Tests](#running-behave-tests)
-   - [Running Unit Tests](#running-unit-tests)
-   - [Running Integration Tests](#running-integration-tests)
-4. [Development Workflow](#development-workflow)
-5. [Examples](#examples)
-6. [Troubleshooting](#troubleshooting)
-
----
 
 ## Setup
 
@@ -37,16 +23,24 @@ This project uses **Behave**, a behavior-driven development (BDD) framework, to 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/chaos-testing.git
-   cd chaos-testing
+   git clone https://github.com/logicminds/gherkin-chaos-maker
+   cd gherkin-chaos-maker
+   ```
 
-2. python -m venv venv
+2. Setup the environment
+```
+python -m venv venv
 source venv/bin/activate  # Linux/macOS
 venv\Scripts\activate     # Windows
+```
 
-3. pip install -r requirements.txt
+3. Install requirements
+```
+pip install -r requirements.txt
+```
 
 
+## Layout 
 ```
 chaos-testing/
 ├── features/                     # Behave feature files and steps
@@ -61,11 +55,6 @@ chaos-testing/
 ├── requirements.txt              # Python dependencies
 ├── README.md                     # Project documentation
 ```
-
-behave features/chaos_testing.feature
-python -m unittest discover -s tests
-python tests/test_behave_integration.py
-
 
 ## Example Feature
 ```gherkin
@@ -105,15 +94,15 @@ Feature: Chaos Testing with Behave
 ```
 
 ## Development Workflow
-	1.	Write Scenarios:
+1.	Write Scenarios:
 Add Gherkin scenarios in .feature files under the features/ directory.
-	2.	Implement Step Definitions:
+2.	Implement Step Definitions:
 Write step definitions in Python files under the features/steps/ directory.
-	3.	Run Tests:
+3.	Run Tests:
 Use Behave to execute the scenarios and generate JSON files.
-	4.	Validate Output:
+4.	Validate Output:
 Confirm that the eris_experiment files are correct.
-	5.	Write Tests:
+5.	Write Tests:
 Add unit and integration tests in the tests/ directory.
 
 
@@ -123,16 +112,18 @@ Run unit tests to validate individual components, such as file generation logic:
 
 `python -m unittest discover -s tests`
 
+
 ## Integration Tests
 Run integration tests to ensure the entire system works as expected, including Behave scenarios and file generation:
-`python tests/test_behave_integration.py`
+`python tests/tests_behave_integration.py`
 
-## generaeting the chaos files
+## Usage
+### generaeting the chaos files
 Run the Behave tests to generate chaos experiments:
 `behave`
 
-To run a specific feature:
+### To run a specific feature:
 `behave features/chaos_testing.feature`
 
-To run a specific scenario:
+### To run a specific scenario:
 `behave --name "Simulate a network partition between Service A and Service B"`
