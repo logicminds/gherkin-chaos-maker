@@ -2,6 +2,7 @@
 
 This project uses **Behave**, a behavior-driven development (BDD) framework, to test and generate chaos testing experiments in JSON format. The framework includes step definitions, hooks, and tests to ensure the correct generation of chaos experiments.
 
+This project is a working template/design that you can copy for your own needs and only provides the ability to abstract away the creation of json from feature/scenarios.  You will need to clone this repo and write your own step code. 
 
 ## Features
 
@@ -118,7 +119,7 @@ Run integration tests to ensure the entire system works as expected, including B
 `python tests/tests_behave_integration.py`
 
 ## Usage
-### generaeting the chaos files
+### generating the chaos files
 Run the Behave tests to generate chaos experiments:
 `behave`
 
@@ -127,3 +128,6 @@ Run the Behave tests to generate chaos experiments:
 
 ### To run a specific scenario:
 `behave --name "Simulate a network partition between Service A and Service B"`
+
+
+
