@@ -9,7 +9,16 @@ def before_feature(context, feature):
         "version": "1.0",
         "name": "",
         "description": "",
-        "phases": []
+        "metadata": {"region": "na", "cluster": "default", "businesses": "bankofmemes"},
+        "parameters": {
+            "business1": "bankofmemes",
+            "env": "test",
+            "cluster": "default",
+            "region": "na",
+            "deployment_id": "1234",
+            "bearer_token": "Bearer sdfksdafasdf",
+        },
+        "phases": [],
     }
 
 
